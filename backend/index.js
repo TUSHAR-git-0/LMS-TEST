@@ -15,8 +15,11 @@ dotenv.config()
 makeUploadDir()
 
 let app = express()
+const corsOrigin = process.env.CORS_ORIGIN
+    ? process.env.CORS_ORIGIN.split(",").map((o) => o.trim()).filter(Boolean)
+    : true
 app.use(cors({
-    origin: ["http://localhost:5173", "https://learning-management-system-sigma-two.vercel.app"],
+    origin: corsOrigin,
     credentials: true
 }))
 app.use(express.json())
