@@ -1,27 +1,22 @@
-import { getAuth, GoogleAuthProvider } from "firebase/auth";
+// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+import { getAuth , GoogleAuthProvider} from "firebase/auth";
+
 
 const firebaseConfig = {
-  apiKey: import.meta.env.VITE_FIREBASE_APIKEY,
-  authDomain: "learning-management-sys-bccd1.firebaseapp.com",
-  projectId: "learning-management-sys-bccd1",
-  storageBucket: "learning-management-sys-bccd1.firebasestorage.app",
-  messagingSenderId: "1033837492623",
-  appId: "1:1033837492623:web:09ee21250bdfb1a705b3fa"
+  apiKey: "AIzaSyDQ9GMV_dtbndJ1G_PekxZHhRRnrB0ni1k",
+  authDomain: "learning-b85af.firebaseapp.com",
+  projectId: "learning-b85af",
+  storageBucket: "learning-b85af.firebasestorage.app",
+  messagingSenderId: "889057504808",
+  appId: "1:889057504808:web:de15004573324905b48f1d",
+  measurementId: "G-T6XJYKQTZX"
 };
 
-let app = null;
-let auth = null;
-let provider = null;
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const provider =  new GoogleAuthProvider();
 
-try {
-  if (firebaseConfig.apiKey) {
-    app = initializeApp(firebaseConfig);
-    auth = getAuth(app);
-    provider = new GoogleAuthProvider();
-  }
-} catch (error) {
-  console.warn("Firebase not configured: Google login will be unavailable.", error);
-}
-
-export { auth, provider };
+export{auth , provider}
