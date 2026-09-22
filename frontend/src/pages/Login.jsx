@@ -47,7 +47,7 @@ function Login() {
       let name = user.displayName;
       let email = user.email
       let role = ""
-      const result = await axios.post(serverUrl + "/api/auth/googlesignup", { name, email, role }, { withCredentials: true })
+      const result = await axios.post(serverUrl + "/api/auth/googlesignup", { name, email, role, photoUrl: user.photoURL }, { withCredentials: true })
       dispatch(setUserData(result.data))
       navigate("/")
       toast.success("Login Successfully")

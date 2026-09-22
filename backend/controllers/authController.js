@@ -87,12 +87,15 @@ export const logOut = async(req,res)=>{
 
 export const googleSignup = async (req,res) => {
     try {
-        const {name , email , role} = req.body
+        const {name , email , role , photoUrl} = req.body
         let user= await User.findOne({email})
         if(!user){
             user = await User.create({
-            name , email ,role
-        })
+                name,
+                email,
+                role: role === "educator" ? "educator" : "student",
+                photoUrl: photoUrl || ""
+            })
         }
         let token =await genToken(user._id)
         res.cookie("token", token, {
@@ -100,8 +103,9 @@ export const googleSignup = async (req,res) => {
             secure: true,
             sameSite: "none",
             maxAge: 7 * 24 * 60 * 60 * 1000
-            })      
-        return res.status(200).json(user)
+            })
+        const safeUser = await User.findById(user._id).select("-password -resetOtp -otpExpires")
+        return res.status(200).json(safeUser)
 
 
     } catch (error) {

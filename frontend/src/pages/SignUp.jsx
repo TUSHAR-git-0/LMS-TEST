@@ -49,7 +49,7 @@ function SignUp() {
       let user = response.user
       let name = user.displayName;
       let email = user.email
-      const result = await axios.post(serverUrl + "/api/auth/googlesignup", { name, email, role }, { withCredentials: true })
+      const result = await axios.post(serverUrl + "/api/auth/googlesignup", { name, email, role, photoUrl: user.photoURL }, { withCredentials: true })
       dispatch(setUserData(result.data))
       navigate("/")
       toast.success("SignUp Successfully")
